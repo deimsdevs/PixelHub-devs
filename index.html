@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PixelHub — We Make Your World a Better Place to Be</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #1a3aff;
+    --blue-dark: #0d1fa8;
+    --purple: #7b2fff;
+    --purple-light: #a855f7;
+    --accent: #00e5ff;
+    --bg: #05050f;
+    --bg2: #0c0c1e;
+    --bg3: #111128;
+    --text: #f0f0ff;
+    --muted: #8888aa;
+    --card: #0f0f24;
+    --border: rgba(120,120,200,0.15);
+    --gradient: linear-gradient(135deg, var(--blue), var(--purple));
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, .logo-text, nav a {
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 6%;
+    background: rgba(5,5,15,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: var(--gradient);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+  }
+
+  .logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+    .logo-text span { 
+    background: var(--gradient); 
+    background-clip: text;
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--gradient);
+    color: #fff !important;
+    padding: 0.5rem 1.3rem;
+    border-radius: 8px;
+    font-size: 0.88rem !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 6% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%;
+    width: 60%; height: 80%;
+    background: radial-gradient(ellipse, rgba(26,58,255,0.18) 0%, transparent 70%);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: -10%; right: -5%;
+    width: 55%; height: 70%;
+    background: radial-gradient(ellipse, rgba(123,47,255,0.15) 0%, transparent 70%);
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(120,120,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,120,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26,58,255,0.12);
+    border: 1px solid rgba(26,58,255,0.3);
+    color: #7ba8ff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+    .hero-title .gradient-text {
+    background: linear-gradient(135deg, #7ba8ff 0%, #a855f7 50%, var(--accent) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-tagline {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gradient);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-outline:hover { border-color: rgba(120,120,200,0.5); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+    .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 6%; }
+
+  .section-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #7ba8ff;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  .section-header { margin-bottom: 3.5rem; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--bg2); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { border-color: rgba(120,120,200,0.4); transform: translateY(-4px); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    background: rgba(26,58,255,0.12);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    color: #7ba8ff;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+
+  .service-price {
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    color: #a855f7;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── HOW WE WORK ── */
+  #how { background: var(--bg); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    position: relative;
+  }
+
+  .step {
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin: 0 auto 1.2rem;
+  }
+
+  .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .step p { color: var(--muted); font-size: 0.88rem; }
+
+  /* ── OUR WORK ── */
+  #work { background: var(--bg2); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .work-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .work-card:hover { transform: translateY(-4px); border-color: rgba(120,120,200,0.4); }
+
+  .work-thumb {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .work-thumb.web { background: linear-gradient(135deg, rgba(26,58,255,0.2), rgba(123,47,255,0.2)); }
+  .work-thumb.app { background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(26,58,255,0.2)); }
+  .work-thumb.ui { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(123,47,255,0.2)); }
+  .work-thumb.ecom { background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(168,85,247,0.15)); }
+
+  .work-tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(5,5,15,0.7);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 50px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  .work-info { padding: 1.4rem; }
+  .work-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .work-info p { color: var(--muted); font-size: 0.87rem; }
+
+  /* ── WHY US ── */
+  #why { background: var(--bg); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .why-card {
+    padding: 1.8rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card);
+  }
+
+  .why-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #7ba8ff;
+  }
+
+  .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .why-card p { color: var(--muted); font-size: 0.88rem; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--bg2); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+  }
+
+  .stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 1rem; }
+
+  .testi-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.4rem; font-style: italic; }
+
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+
+  .testi-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+  }
+
+  .testi-name { font-weight: 600; font-size: 0.9rem; font-family: 'Syne', sans-serif; }
+  .testi-role { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 380px;
+  }
+
+  .about-blob {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,58,255,0.15), rgba(123,47,255,0.15));
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-metric {
+    text-align: center;
+  }
+
+    .about-metric-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .about-metric-label { font-size: 0.82rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .about-metrics { display: flex; gap: 3rem; }
+
+  .about-text p { color: var(--muted); font-size: 1rem; margin-bottom: 1.2rem; font-weight: 300; }
+
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem; }
+
+  .tag {
+    background: rgba(26,58,255,0.1);
+    border: 1px solid rgba(26,58,255,0.25);
+    color: #7ba8ff;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── LETS TALK ── */
+  #contact { background: var(--bg2); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .contact-detail i { color: #7ba8ff; width: 18px; text-align: center; }
+
+  .contact-detail a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .contact-detail a:hover { color: var(--text); }
+
+  .socials {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .social-btn {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .social-btn:hover { color: var(--text); border-color: rgba(120,120,200,0.5); transform: translateY(-2px); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .form-group label { font-size: 0.82rem; color: var(--muted); font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(136,136,170,0.5); }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: rgba(26,58,255,0.5); }
+
+  .form-group textarea { resize: vertical; min-height: 130px; }
+
+  .form-group select option { background: var(--bg2); }
+
+  .submit-btn {
+    background: var(--gradient);
+    color: #fff;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 999;
+    width: 54px; height: 54px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(37,211,102,0.55); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 3rem 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-copy { color: var(--muted); font-size: 0.85rem; }
+  .footer-copy span { color: #a855f7; }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--muted); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: var(--bg2); padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-visual { height: 260px; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="logo">
+    <div class="logo-icon">PH</div>
+    <span class="logo-text">Pixel<span>Hub</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">What We Do Best</a></li>
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content fade-up">
+    <div class="hero-badge">Available for projects in Kenya & beyond</div>
+    <h1 class="hero-title">
+      We Make Your<br />
+      <span class="gradient-text">World a Better</span><br />
+      Place to Be
+    </h1>
+    <p class="hero-tagline">
+      From websites and mobile apps to UI/UX design and e-commerce — PixelHub delivers digital products built to impress, starting from KSh 5,000.
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary"><i class="fa-solid fa-rocket"></i> Start a Project</a>
+      <a href="#work" class="btn-outline"><i class="fa-regular fa-eye"></i> See Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Projects Delivered</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5K+</span>
+        <span class="stat-label">Starting Price (KSh)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header fade-up">
+    <span class="section-label">Our Expertise</span>
+    <h2 class="section-title">What We Do Best</h2>
+    <p class="section-sub">We cover the full spectrum of digital creation — whatever you need built, we build it right.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+      <h3>Website Development</h3>
+      <p>Clean, fast, and responsive websites tailored to your brand. From landing pages to full business platforms.</p>
+      <div class="service-price">From KSh 5,000</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+      <h3>Mobile App Development</h3>
+      <p>Android apps built with purpose — smooth UX, smart features, and real-world functionality your users will love.</p>
+      <div class="service-price">From KSh 15,000</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+      <h3>UI/UX Design</h3>
+      <p>Interfaces that feel intuitive. We design digital experiences that are beautiful and effortless to use.</p>
+      <div class="service-price">From KSh 4,000</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+      <h3>E-Commerce Solutions</h3>
+      <p>Fully functional online stores with payment integration, inventory management, and a seamless checkout flow.</p>
+      <div class="service-price">From KSh 12,000</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
+      <h3>Portfolio & Business Sites</h3>
+      <p>Make a lasting first impression. Professional portfolio and business sites that showcase what you stand for.</p>
+      <div class="service-price">From KSh 5,000</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-comments"></i></div>
+      <h3>Tech Consultation</h3>
+      <p>Not sure where to start? We'll walk you through the best tech decisions for your business or idea.</p>
+      <div class="service-price">Free Initial Consult</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section id="how">
+  <div class="section-header fade-up">
+    <span class="section-label">The Process</span>
+    <h2 class="section-title">How We Work</h2>
+    <p class="section-sub">Simple, transparent, and results-driven — here's what working with PixelHub looks like.</p>
+  </div>
+  <div class="process-steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <h3>Consult</h3>
+      <p>We start by understanding your vision, goals, and budget — no jargon, just honest conversation.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">02</div>
+      <h3>Design</h3>
+      <p>We craft wireframes and design mockups so you can see exactly what we're building before a single line of code.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">03</div>
+      <h3>Build</h3>
+      <p>Our devs bring the design to life — clean code, optimized performance, tested on all devices.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">04</div>
+      <h3>Deliver</h3>
+      <p>We hand over a finished product you're proud of — with support to make sure everything runs smoothly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR WORK -->
+<section id="work">
+  <div class="section-header fade-up">
+    <span class="section-label">Portfolio</span>
+    <h2 class="section-title">Our Work</h2>
+    <p class="section-sub">A snapshot of what we've built. Real projects, real results — with more coming every day.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card fade-up">
+      <div class="work-thumb web">
+        <span class="work-tag">Web</span>
+        <i class="fa-solid fa-laptop-code" style="color:#7ba8ff;font-size:3rem;"></i>
+      </div>
+      <div class="work-info">
+        <h3>Business Landing Page</h3>
+        <p>A conversion-focused landing page for a Nairobi-based retail brand with integrated WhatsApp inquiry flow.</p>
+      </div>
+    </div>
+    <div class="work-card fade-up">
+      <div class="work-thumb app">
+        <span class="work-tag">Mobile App</span>
+        <i class="fa-solid fa-mobile-screen" style="color:#00e5ff;font-size:3rem;"></i>
+      </div>
+      <div class="work-info">
+        <h3>Android Utility App</h3>
+        <p>A lightweight Android app built for a local business to streamline their daily operations and client tracking.</p>
+      </div>
+    </div>
+    <div class="work-card fade-up">
+      <div class="work-thumb ui">
+        <span class="work-tag">UI/UX</span>
+        <i class="fa-solid fa-palette" style="color:#a855f7;font-size:3rem;"></i>
+      </div>
+      <div class="work-info">
+        <h3>App UI Redesign</h3>
+        <p>Full UI overhaul of a delivery app — improved user flows, new design system, and 40% better usability scores.</p>
+      </div>
+    </div>
+    <div class="work-card fade-up">
+      <div class="work-thumb ecom">
+        <span class="work-tag">E-Commerce</span>
+        <i class="fa-solid fa-store" style="color:#00e5ff;font-size:3rem;"></i>
+      </div>
+      <div class="work-info">
+        <h3>Online Store</h3>
+        <p>A fully featured e-commerce platform for a Kenyan fashion brand — with M-Pesa payment and product management.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-header fade-up">
+    <span class="section-label">Why PixelHub</span>
+    <h2 class="section-title">Why Choose Us</h2>
+    <p class="section-sub">We're not just developers — we're your digital partners.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fa-solid fa-bolt"></i></div>
+      <h3>Fast Delivery</h3>
+      <p>We move quickly without cutting corners. Most projects are delivered on time — or ahead of schedule.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fa-solid fa-wallet"></i></div>
+      <h3>Budget-Friendly</h3>
+      <p>Quality digital work shouldn't be a luxury. We offer competitive pricing for every kind of budget.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h3>Quality Guaranteed</h3>
+      <p>Every project goes through thorough testing before handover. We don't ship something we're not proud of.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+      <h3>Kenya-Based</h3>
+      <p>We understand the local market. Kenyan business needs, context, and payment systems — we speak the language.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header fade-up">
+    <span class="section-label">Client Feedback</span>
+    <h2 class="section-title">What Clients Say</h2>
+    <p class="section-sub">Don't take our word for it — here's what the people we've worked with have to say.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-up">
+      <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+      <p>"PixelHub delivered exactly what I had in mind — and faster than I expected. The site looks professional and my customers love it."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">JM</div>
+        <div>
+          <div class="testi-name">James Mwangi</div>
+          <div class="testi-role">Business Owner, Nairobi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+      <p>"The app they built for us is exactly what we needed. Simple, clean, and works perfectly. The team was easy to work with throughout."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AW</div>
+        <div>
+          <div class="testi-name">Aisha Wanjiku</div>
+          <div class="testi-role">Startup Founder, Mombasa</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+      <p>"Great value for money. My e-commerce store has been running smoothly for months with zero issues. Highly recommend PixelHub."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">BK</div>
+        <div>
+          <div class="testi-name">Brian Kamau</div>
+          <div class="testi-role">Online Retailer, Thika</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual fade-up">
+      <div class="about-blob">
+        <div class="about-metrics">
+          <div class="about-metric">
+            <div class="about-metric-num">50+</div>
+            <div class="about-metric-label">Projects</div>
+          </div>
+          <div class="about-metric">
+            <div class="about-metric-num">3+</div>
+            <div class="about-metric-label">Years Active</div>
+          </div>
+          <div class="about-metric">
+            <div class="about-metric-num">30+</div>
+            <div class="about-metric-label">Happy Clients</div>
+          </div>
+        </div>
+        <div style="font-size:3.5rem;opacity:0.3;"><i class="fa-solid fa-code"></i></div>
+      </div>
+    </div>
+    <div class="about-text fade-up">
+      <span class="section-label">About PixelHub</span>
+      <h2 class="section-title">Built by Developers, <br/>For Real People</h2>
+      <p>PixelHub is a Kenya-based digital agency passionate about turning ideas into polished digital products. We work with entrepreneurs, startups, businesses, and individuals who want technology that actually works — and looks great doing it.</p>
+      <p>From a single developer's dream to a growing team of creatives and coders, we've built everything from simple landing pages to complex mobile applications. Every project gets the same level of dedication and attention to detail.</p>
+      <p>Our mission is simple: make the digital world a better place — one project at a time.</p>
+      <div class="about-tags">
+        <span class="tag">Web Dev</span>
+        <span class="tag">Android</span>
+        <span class="tag">UI/UX</span>
+        <span class="tag">E-Commerce</span>
+        <span class="tag">Branding</span>
+        <span class="tag">Tech Consulting</span>
+        <span class="tag">Kenya</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LETS TALK -->
+<section id="contact">
+  <div class="section-header fade-up">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Let's Talk</h2>
+    <p class="section-sub">Ready to build something great? Tell us about your project and we'll get back to you within 24 hours.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <h3>Contact Details</h3>
+      <div class="contact-detail"><i class="fa-solid fa-phone"></i><span>+254 740 860 725</span></div>
+      <div class="contact-detail"><i class="fa-solid fa-phone"></i><span>+254 740 023 593</span></div>
+      <div class="contact-detail"><i class="fa-solid fa-envelope"></i><a href="mailto:devs.pixelhub@gmail.com">devs.pixelhub@gmail.com</a></div>
+      <div class="contact-detail"><i class="fa-solid fa-location-dot"></i><span>Kenya</span></div>
+      <div class="socials">
+        <a href="https://instagram.com/pixelhub" class="social-btn" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://twitter.com/pixelhub" class="social-btn" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://facebook.com/pixelhub" class="social-btn" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://linkedin.com/company/pixelhub" class="social-btn" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/pixelhub" class="social-btn" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://tiktok.com/@pixelhub" class="social-btn" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://wa.me/254740860725" class="social-btn" target="_blank" title="WhatsApp" style="color:#25d366;"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="fade-up">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Kamau" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="john@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Website Development</option>
+            <option>Mobile App Development</option>
+            <option>UI/UX Design</option>
+            <option>E-Commerce Solution</option>
+            <option>Portfolio / Business Site</option>
+            <option>Tech Consultation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Project</label>
+          <textarea placeholder="Describe your project, budget range, and timeline..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">
+          <i class="fa-solid fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/254740860725" class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 <span>PixelHub</span>. All rights reserved. Made with ❤️ in Kenya.</div>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Let's Talk</a>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const ham = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  ham.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Close menu on link click
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.submit-btn');
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Message Sent!';
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'default';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+      btn.style.opacity = '';
+      btn.style.cursor = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
