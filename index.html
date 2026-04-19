@@ -1149,22 +1149,29 @@
 `Name: ${name}
 Email: ${email}
 Service: ${service}
-
 Message:
 ${message}`
     );
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=devs.pixelhub@gmail.com&su=${subject}&body=${body}`;
-setTimeout(() => window.open(gmailUrl, '_blank'), 300);
 
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=devs.pixelhub@gmail.com&su=${subject}&body=${body}`;
+    const mailtoUrl = `mailto:devs.pixelhub@gmail.com?subject=${subject}&body=${body}`;
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    // Show feedback immediately
     const btn = form.querySelector('.submit-btn');
-    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Redirecting to Gmail...';
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Redirecting...';
     btn.style.opacity = '0.7';
+
+    // Open mail after short delay
+    setTimeout(() => window.open(isMobile ? mailtoUrl : gmailUrl, '_blank'), 300);
+
+    // Reset button and form after 3s
     setTimeout(() => {
         btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
         btn.style.opacity = '';
         form.reset();
     }, 3000);
-  }
+}
 </script>
 </body>
 </html>
