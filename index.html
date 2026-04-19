@@ -721,7 +721,9 @@
     .nav-links.open { display: flex; }
     .hamburger { display: flex; }
     .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-visual { height: 260px; }
+    .about-visual { height: auto; min-height: 220px; }
+.about-metrics { flex-direction: column; gap: 1.2rem; align-items: center; }
+.about-metric-num { font-size: 2rem; }
     .form-row { grid-template-columns: 1fr; }
     .hero-stats { gap: 2rem; }
     footer { flex-direction: column; align-items: flex-start; }
@@ -1004,15 +1006,15 @@
       <div class="about-blob">
         <div class="about-metrics">
           <div class="about-metric">
-            <div class="about-metric-num">50+</div>
+            <div class="about-metric-num">20+</div>
             <div class="about-metric-label">Projects</div>
           </div>
           <div class="about-metric">
-            <div class="about-metric-num">3+</div>
+            <div class="about-metric-num">1+</div>
             <div class="about-metric-label">Years Active</div>
           </div>
           <div class="about-metric">
-            <div class="about-metric-num">30+</div>
+            <div class="about-metric-num">50+</div>
             <div class="about-metric-label">Happy Clients</div>
           </div>
         </div>
@@ -1151,7 +1153,8 @@ Service: ${service}
 Message:
 ${message}`
     );
-    window.open(`https://mail.google.com/mail/?view=cm&to=devs.pixelhub@gmail.com&su=${subject}&body=${body}`, '_blank');
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=devs.pixelhub@gmail.com&su=${subject}&body=${body}`;
+setTimeout(() => window.open(gmailUrl, '_blank'), 300);
 
     const btn = form.querySelector('.submit-btn');
     btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Redirecting to Gmail...';
