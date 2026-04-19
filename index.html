@@ -762,8 +762,15 @@
 <!-- HERO -->
 <section id="home">
   <div class="hero-bg">
+    <video id="heroVid1" autoplay muted playsinline
+  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5;z-index:0;transition:opacity 1s ease;">
+  <source src="https://res.cloudinary.com/dn0zhkmhr/video/upload/v1776630593/Fishblue_feds9f.mp4" type="video/mp4">
+</video>
+<video id="heroVid2" muted playsinline
+  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transition:opacity 1s ease;">
+</video>
     <div class="grid-overlay"></div>
-  </div>
+</div>
   <div class="hero-content fade-up">
     <div class="hero-badge">Available for projects in Kenya & beyond</div>
     <h1 class="hero-title">
@@ -1172,6 +1179,51 @@ ${message}`
         form.reset();
     }, 3000);
 }
+// Hero video rotation
+const heroVideos = [
+  'https://res.cloudinary.com/dn0zhkmhr/video/upload/v1776630593/Fishblue_feds9f.mp4',
+  'https://res.cloudinary.com/dn0zhkmhr/video/upload/v1776630750/bluefish_sm2xcy.mp4',
+  'https://res.cloudinary.com/dn0zhkmhr/video/upload/v1776630908/Yellowfish_taqgzo.mp4'
+];
+let currentIndex = 0;
+const vid1 = document.getElementById('heroVid1');
+const vid2 = document.getElementById('heroVid2');
+let active = vid1;
+let standby = vid2;
+let preloaded = false;
+
+function preloadNext() {
+  if (preloaded) return;
+  preloaded = true;
+  const nextIndex = (currentIndex + 1) % heroVideos.length;
+  standby.src = heroVideos[nextIndex];
+  standby.load();
+  standby.play().catch(() => {});
+}
+
+function switchVideo() {
+  currentIndex = (currentIndex + 1) % heroVideos.length;
+  standby.style.opacity = '0.5';
+  active.style.opacity = '0';
+
+  setTimeout(() => {
+    active.pause();
+    active.src = '';
+    active.removeAttribute('src');
+    [active, standby] = [standby, active];
+    preloaded = false;
+  }, 1000);
+}
+
+vid1.addEventListener('timeupdate', function() {
+  if (active === vid1 && vid1.duration && vid1.currentTime >= vid1.duration - 1.5) preloadNext();
+});
+vid2.addEventListener('timeupdate', function() {
+  if (active === vid2 && vid2.duration && vid2.currentTime >= vid2.duration - 1.5) preloadNext();
+});
+
+vid1.addEventListener('ended', function() { if (active === vid1) switchVideo(); });
+vid2.addEventListener('ended', function() { if (active === vid2) switchVideo(); });
 </script>
 </body>
 </html>
