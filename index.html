@@ -25,7 +25,7 @@
     --gradient: linear-gradient(135deg, var(--blue), var(--purple));
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -742,7 +742,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#home" class="logo">
-    <div class="logo-icon">PH</div>
+    <div class="logo-icon" style="font-size:13px;letter-spacing:-1px;">&lt;/&gt;</div>
     <span class="logo-text">Pixel<span>Hub</span></span>
   </a>
   <ul class="nav-links" id="navLinks">
@@ -1089,7 +1089,7 @@
         </div>
         <div class="form-group">
           <label>Tell Us About Your Project</label>
-          <textarea placeholder="Describe your project, budget range, and timeline..."></textarea>
+          <textarea placeholder="Describe your project, budget range, and timeline..." maxlength="5000"></textarea>
         </div>
         <button type="submit" class="submit-btn">
           <i class="fa-solid fa-paper-plane"></i> Send Message
@@ -1106,7 +1106,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy">© 2025 <span>PixelHub</span>. All rights reserved. Made with ❤️ in Kenya.</div>
+  <div class="footer-copy">© 2026 <span>PixelHub</span>. All rights reserved. Made with ❤️ in Kenya.</div>
   <div class="footer-links">
     <a href="#home">Home</a>
     <a href="#services">Services</a>
@@ -1117,36 +1117,34 @@
 </footer>
 
 <script>
-  // Hamburger
-  const ham = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  ham.addEventListener('click', () => navLinks.classList.toggle('open'));
-
-  // Close menu on link click
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
-
-  // Scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // Form submit
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.submit-btn');
-    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Message Sent!';
+    const form = e.target;
+    const name = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const service = form.querySelector('select').value;
+    const message = form.querySelector('textarea').value;
+
+    const subject = encodeURIComponent(`PixelHub Inquiry — ${service || 'General'}`);
+    const body = encodeURIComponent(
+`Name: ${name}
+Email: ${email}
+Service: ${service}
+
+Message:
+${message}`
+    );
+    window.open(`https://mail.google.com/mail/?view=cm&to=devs.pixelhub@gmail.com&su=${subject}&body=${body}`, '_blank');
+
+    const btn = form.querySelector('.submit-btn');
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Redirecting to Gmail...';
     btn.style.opacity = '0.7';
-    btn.style.cursor = 'default';
     setTimeout(() => {
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-      btn.style.opacity = '';
-      btn.style.cursor = '';
-      e.target.reset();
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+        btn.style.opacity = '';
+        form.reset();
     }, 3000);
-  }
+}
 </script>
 </body>
 </html>
